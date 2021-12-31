@@ -1,19 +1,26 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! TeXoutline#cmd#jump(arg) abort
-  let l:curline = line('.')
-  if l:curline == 0
-    return
-  else if l:curline == 1
-    call s:goto_win(getline(l:curline))
-  endif
-  let l:line = getline(l:curline)
+function! TeXOutline#cmd#indent(depth, line1, line2) abort
+  let l:save_pos = getpos('.')
+  let l:lines = a:line1 == a:line2
+        \ ? [getline('.')]
+        \ : getline(a:line1, a:line2)
+  let l:bufname = split(l:lines[0], '|')[0]
+  let l:bufnr = bufnr(l:bufname)
+  for l:line in l:lines
+    let l:lnum = split(l:line, '|')[1]
+    let l:content = getbufline(l:bufnr, l:lnum)[0]
+    call setbufline(l:bufnr, l:lnum,
+          \ (a:depth == 1
+          \ ? substitute(l:content, 'section', 'subsection', '')
+          \ : substitute(l:content, 'subsection', 'section', '')))
+  endfor
+  call TeXOutline#opener#open_side_bar(
+        \ TeXOutline#constructor#get_sections(l:bufnr)
+        \ )
+  call setpos('.', l:save_pos)
 endfunction
-
-function! s:get_info_under_cursor(lnum) abort
-
-endfunction   
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

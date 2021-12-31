@@ -6,17 +6,24 @@ function! TeXOutline#opener#open_side_bar(contents) abort
     " show error?
     return
   endif
-  let l:opener = get(g:, 'TeXOutline_opener', 'vertical botright')
   let l:width = get(g:, 'TeXOutline_width', 30)
-  " open
-  let l:cmd =  join([l:opener . l:width . 'new' . '__TeXOutline__'], ' ')
-  execute l:cmd
-  call setline(1, a:contents)
-  call s:set_option()
-endfunction
+  let l:save_eft = &errorformat
+  let &errorformat = '%f:%m:%l'
+  execute 'lgetexpr a:contents | vertical botright' . l:width . 'lopen'
+  let &errorfile = l:save_eft
 
-function! s:set_option() abort
-  setlocal readonly buftype=nofile filetype=TeXOutline nomodifiable
+  if !get(g:, 'texoutline_disable_conceal', v:false)
+    setlocal conceallevel=3 concealcursor=nc nowrap
+    syntax match texoutline_conceal '[a-zA-z\/\._]\+|\d\+|' conceal
+    syntax match texoutline_conceal_section '\(sub\)*section' conceal
+  endif
+
+  if !get(g:, 'texoutline_disable_mappings', v:false)
+    nmap <buffer> << <Plug>(texoutline:normal:dedent)
+    nmap <buffer> >> <Plug>(texoutline:normal:indent)
+    xmap <buffer> <  <Plug>(texoutline:visual:dedent)
+    xmap <buffer> >  <Plug>(texoutline:visual:indent)
+  endif
 endfunction
 
 let &cpo = s:save_cpo
