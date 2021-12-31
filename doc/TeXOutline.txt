@@ -1,0 +1,73 @@
+*TeXOutline*            Show TeX outline and indent/dedent it
+
+License: MIT license
+
+CONTENTS                                        *TeXOutline-contents*
+Introduction            |TeXOutline-introduction|
+Install                 |TeXOutline-install|
+Usage                   |TeXOutline-usage|
+Commands                |TeXOutline-commands|
+Mappings                |TeXOutline-Mappings|
+Variables               |TeXOutline-variables|
+
+==============================================================================
+INTRODUCTION                                    *TeXOutline-introduction*
+
+This plugin make able to show and handle TeX outline.
+
+==============================================================================
+INSTALL                                         *TeXOutline-install*
+
+Use your favorite plugin manager
+>
+        "vim-plug
+        Plug 'Omochice/TeXOutline.vim'
+
+        "dein.vim
+        call dein#add('Omochice/TeXOutline.vim')
+<
+This plugin depends on below.
+
+==============================================================================
+USAGE                                           *TeXOutline-usage*
+
+On TeX source, Type `TeXOutline` to show outline.
+
+After this command, cursor move to outline buffer automatically.
+
+On outline buffer, type `>>` or `<<` on normal-mode to indent/dedent section.
+And type `>` or `<` on visual-mode is able too.
+
+==============================================================================
+COMMANDS                                        *TeXOutline-commands*
+
+- `TeXOutline`
+        Show outline current TeX source.
+
+- `TeXOutlineIndent`
+        Indent the section(s) on cursor/selected.
+
+- `TeXOutlineDedent`
+        Dedent the section(s) on cursor/selected.
+
+==============================================================================
+MAPPINGS                                        *TeXOutline-mappings*
+
+On outline buffer, below commands are defined.
+>
+    nmap <buffer> << <Plug>(texoutline:normal:dedent)
+    nmap <buffer> >> <Plug>(texoutline:normal:indent)
+    xmap <buffer> <  <Plug>(texoutline:visual:dedent)
+    xmap <buffer> >  <Plug>(texoutline:visual:indent)
+<
+
+==============================================================================
+VARIABLES                                       *TeXOutline-variables*
+
+- `g:texoutline_disable_conceal`		*g:texoutline_disable_conceal*
+        Disable conceal on outline. (Default to `v:false`)
+
+- `g:texoutline_disable_mappings`		*g:texoutline_disable_mappings*
+        Disable mapping on outline. (Default to `v:false`)
+
+vim:tw=78:fo=tcq2mM:ts=4:ft=help:norl:noet:fdm=marker:fen:
