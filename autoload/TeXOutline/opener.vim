@@ -6,14 +6,14 @@ function! TeXOutline#opener#open_side_bar(contents) abort
     " show error?
     return
   endif
-  let l:width = get(g:, 'TeXOutline_width', 30)
+  let l:width = get(g:, 'texoutline_width', 30)
   let l:save_eft = &errorformat
   let &errorformat = '%f:%m:%l'
   execute 'lgetexpr a:contents | vertical botright' . l:width . 'lopen'
   let &errorfile = l:save_eft
 
   if !get(g:, 'texoutline_disable_conceal', v:false)
-    setlocal conceallevel=3 concealcursor=nc nowrap
+    setlocal conceallevel=3 concealcursor=nvc nowrap
     syntax match texoutline_conceal '[a-zA-z\/\._]\+|\d\+|' conceal
     syntax match texoutline_conceal_section '\(sub\)*section' conceal
   endif

@@ -70,4 +70,7 @@ VARIABLES                                       *TeXOutline-variables*
 - `g:texoutline_disable_mappings`		*g:texoutline_disable_mappings*
         Disable mappings on outline. (Default to `v:false`)
 
+- `g:texoutline_width`				*g:texoutline_width*
+        Number that use as outline width (Default to `30`)
+
 vim:tw=78:fo=tcq2mM:ts=4:ft=help:norl:noet:fdm=marker:fen:

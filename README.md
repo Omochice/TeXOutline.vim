@@ -47,10 +47,11 @@ xmap <buffer> >  <Plug>(texoutline:visual:indent)
 
 ## Variables
 
-- `g:texoutline_disable_conceal`		*g:texoutline_disable_conceal*
+- `g:texoutline_disable_conceal`
         Disable conceal on outline. (Default to `v:false`)
 
-- `g:texoutline_disable_mappings`		*g:texoutline_disable_mappings*
+- `g:texoutline_disable_mappings`
         Disable mappings on outline. (Default to `v:false`)
 
-
+- `g:texoutline_width`
+        Number that use as outline width (Default to `30`)
