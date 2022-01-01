@@ -1,6 +1,10 @@
+[![CI](https://github.com/Omochice/TeXOutline.vim/actions/workflows/ci.yml/badge.svg)](https://github.com/Omochice/TeXOutline.vim/actions/workflows/ci.yml)
+
 # TeXOutline.vim
 
 Vim/Neovim plugin that show TeX outline and indent/dedent it.
+
+![demo](https://i.gyazo.com/bc64e56cb2b2e17732ae094044c00d33.gif)
 
 ## Installation
 
