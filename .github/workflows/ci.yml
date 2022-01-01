@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - "README.md"
+      - "doc/TeXOutline.txt"
   pull_request:
     paths-ignore:
       - "README.md"
