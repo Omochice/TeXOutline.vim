@@ -27,4 +27,21 @@ function! s:suite.test_open_outline() abort
   " window width must be equal to 30
   let l:wininfo = filter(getwininfo(), {_, v -> v['bufnr'] == l:bufnr})[0]
   call assert_equal(30, l:wininfo['width'])
+  " tear down
+  execute '%bdelete!'
+endfunction
+
+function! s:suite.test_change_width() abort
+  let l:save_bufnr = bufnr()
+  call s:construct(s:lines, l:save_bufnr)
+  for l:width in [5, 10, 20]
+    " TODO: use better way
+    wincmd h
+    let g:texoutline_width = l:width
+    execute 'TeXOutline'
+    let l:wininfo = filter(getwininfo(), {_, v -> v['bufnr'] == bufnr()})[0]
+    call assert_equal(l:width, l:wininfo['width'])
+  endfor
+  " tear down
+  execute '%bdelete!'
 endfunction
