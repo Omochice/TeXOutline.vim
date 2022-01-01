@@ -22,5 +22,9 @@ function! s:suite.test_open_outline() abort
   " number of buffer must be increased
   call assert_equal(l:n_buffer + 1, len(getbufinfo({'buflisted': v:true})))
   " cursor must move into location-list
-  call assert_false(l:save_bufnr == bufnr())
+  let l:bufnr = bufnr()
+  call assert_false(l:save_bufnr == l:bufnr)
+  " window width must be equal to 30
+  let l:wininfo = filter(getwininfo(), {_, v -> v['bufnr'] == l:bufnr})[0]
+  call assert_equal(30, l:wininfo['width'])
 endfunction
